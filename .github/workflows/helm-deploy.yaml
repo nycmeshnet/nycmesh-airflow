@@ -67,5 +67,5 @@ jobs:
             --set webserver.defaultUser.username="admin" \
             --set webserver.defaultUser.password="${{ secrets.AIRFLOW_ADMIN_PASSWORD }}" \
             --set webserver.startupProbe.failureThreshold="60" \
-            --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
-            --set data.metadataConnection.pass="${{ secrets.AIRFLOW_DB_PASSWORD }}"
+            --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}"
+            --set postgresql.auth.postgresPassword="${{ secrets.AIRFLOW_DB_PASSWORD }}"

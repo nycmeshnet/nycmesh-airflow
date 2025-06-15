@@ -48,6 +48,8 @@ jobs:
             -n airflow \
             --set executor="KubernetesExecutor" \
             --set dags.persistence.enabled="false" \
+            --set ingress.web.enabled="true" \
+            --set ingress.web.host="${{ vars.FQDN }}" \
             --set dags.gitSync.enabled="true" \
             --set dags.gitSync.repo="https://github.com/nycmeshnet/nycmesh-airflow.git" \
             --set dags.gitSync.branch="james/init" \
@@ -61,4 +63,5 @@ jobs:
             --set webserver.defaultUser.username="admin" \
             --set webserver.defaultUser.password="${{ secrets.AIRFLOW_ADMIN_PASSWORD }}" \
             --set webserver.startupProbe.failureThreshold="60" \
-            --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}"
+            --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
+            --set data.metadataConnection.pass="${{ secrets.AIRFLOW_DB_PASSWORD }}"

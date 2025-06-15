@@ -48,8 +48,12 @@ jobs:
             -n airflow \
             --set executor="KubernetesExecutor" \
             --set dags.persistence.enabled="false" \
-            --set ingress.web.enabled="true" \
-            --set ingress.web.host="${{ vars.FQDN }}" \
+            --set webserver.service.type="NodePort" \
+            --set webserver.service.ports[0].port="8080" \
+            --set webserver.service.ports[0].targetPort="8080" \
+            --set webserver.service.ports[0].nodePort="30002" \
+            --set webserver.service.ports[0].protocol="TCP" \
+            --set webserver.service.ports[0].name="http" \
             --set dags.gitSync.enabled="true" \
             --set dags.gitSync.repo="https://github.com/nycmeshnet/nycmesh-airflow.git" \
             --set dags.gitSync.branch="james/init" \

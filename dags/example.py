@@ -68,5 +68,6 @@ k = KubernetesPodOperator(namespace='default',
                           name="test",
                           task_id="task",
                           hostnetwork=False,
+                          get_logs=True,
                           dag=dag,
 )

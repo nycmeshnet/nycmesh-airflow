@@ -9,7 +9,7 @@ from airflow.utils.dates import days_ago
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash_operator import BashOperator
-from airflow.contrib.operators.kubernetes_job_operator import KubernetesJobOperator
+from airflow.providers.cncf.kubernetes.operators.job import KubernetesJobOperator
 
 args = {
     'owner': 'Airflow',
@@ -61,13 +61,13 @@ for i in range(5):
 
     run_this >> task
 
-k = KubernetesJobOperator(namespace='default',
-                          image="ubuntu:20.04",
-                          cmds=["bash", "-cx"],
-                          arguments=["echo", "Hello from k8s"],
-                          name="test",
-                          task_id="task",
-                          hostnetwork=False,
-                          get_logs=True,
-                          dag=dag,
+k = KubernetesJobOperator(
+    task_id="job-task",
+    namespace='default',
+    name="test",
+    image="ubuntu:20.04",
+    cmds=["bash", "-cx"],
+    arguments=["echo", "Hello from k8s"],
+    get_logs=True,
+    dag=dag,
 )

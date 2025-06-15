@@ -63,7 +63,6 @@ for i in range(5):
 
 k = KubernetesJobOperator(
     task_id="job-task",
-    namespace='default',
     name="test",
     image="ubuntu:20.04",
     cmds=["bash", "-cx"],

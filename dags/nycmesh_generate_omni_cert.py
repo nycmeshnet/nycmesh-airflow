@@ -93,3 +93,5 @@ with DAG(
             generate_certbot_tsig_cert(fqdn, DNS_SERVER, TSIG_KEY_NAME, TSIG_KEY, cert_path, priv_key_path)
             deploy_to_omni(fqdn, Variable.get("omni"), cert_path, priv_key_path)
             print("Finished")
+    
+    omni_nn_cert_task()

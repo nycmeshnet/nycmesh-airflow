@@ -39,10 +39,6 @@ dns_rfc2136_algorithm = HMAC-SHA512
     print(completed.stdout)
     print(completed.stderr)
     
-    tmp = subprocess.run("set", check=True)
-    print(tmp.stdout)
-    print(comptmpleted.stderr)
-    
     Path(tsig_ini_file_path).unlink()
 
     return full_chain_path, priv_key_path
@@ -86,6 +82,10 @@ with DAG(
         import subprocess
         from pathlib import Path
         from airflow.models import Variable
+        
+        tmp = subprocess.run("set", check=True)
+        print(tmp.stdout)
+        print(comptmpleted.stderr)
         
         in_scope_nn = ["592"]
 

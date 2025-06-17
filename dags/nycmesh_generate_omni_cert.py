@@ -1,4 +1,4 @@
-from airflow.sdk import DAG, task, Variable
+from airflow.models import DAG, task, Variable
 from airflow.utils.dates import days_ago
 
 def generate_certbot_tsig_cert(fqdn_string, dns_server, tsig_key_name, tsig_key, full_chain_path, priv_key_path):

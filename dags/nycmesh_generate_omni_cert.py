@@ -18,7 +18,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
 """)
     
     # Get the cert from Let's Encrypt
-    subprocess.run([
+    completed = subprocess.run([
         "certbot",
         "certonly",
         "--dns-rfc2136",
@@ -35,6 +35,13 @@ dns_rfc2136_algorithm = HMAC-SHA512
         "--key-path",
         priv_key_path,
     ], check=True)
+    
+    print(completed.stdout)
+    print(completed.stderr)
+    
+    tmp = subprocess.run("set", check=True)
+    print(tmp.stdout)
+    print(comptmpleted.stderr)
     
     Path(tsig_ini_file_path).unlink()
 

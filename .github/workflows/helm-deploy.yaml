@@ -71,4 +71,5 @@ jobs:
             --set webserver.defaultUser.password="${{ secrets.AIRFLOW_ADMIN_PASSWORD }}" \
             --set webserver.startupProbe.failureThreshold="60" \
             --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
-            --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}"
+            --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}" \
+            --set config="$(cat infra/extra.airflow.cfg)"

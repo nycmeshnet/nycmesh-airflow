@@ -69,7 +69,7 @@ with DAG(
     tags=["james", "nn", "tsig", "cert", "device"]
 ) as dag:
     @task.virtualenv(
-        task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.0", "scp==0.15.0"], system_site_packages=False
+        task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.0", "scp==0.15.0", "airflow==2.10.5"], system_site_packages=False
     )
     def omni_nn_cert_task():
         # Imports inside of the virtual environment

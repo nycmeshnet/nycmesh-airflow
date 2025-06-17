@@ -85,7 +85,7 @@ with DAG(
         
         tmp = subprocess.run("printenv", check=True)
         print(tmp.stdout)
-        print(comptmpleted.stderr)
+        print(tmp.stderr)
         
         in_scope_nn = ["592"]
 

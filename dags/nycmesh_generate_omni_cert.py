@@ -83,7 +83,7 @@ with DAG(
         from pathlib import Path
         from airflow.models import Variable
         
-        tmp = subprocess.run("set", check=True)
+        tmp = subprocess.run("printenv", check=True)
         print(tmp.stdout)
         print(comptmpleted.stderr)
         

@@ -1,4 +1,4 @@
-from airflow.models import DAG, Variable
+from airflow.models import DAG
 from airflow.decorators import task
 from airflow.utils.dates import days_ago
 
@@ -78,6 +78,7 @@ with DAG(
 
         import subprocess
         from pathlib import Path
+        from airflow.models import Variable
         
         in_scope_nn = ["592"]
 

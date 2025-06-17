@@ -55,6 +55,8 @@ jobs:
             --set webserver.service.ports[0].protocol="TCP" \
             --set webserver.service.ports[0].name="http" \
             --set triggerer.persistence.size="10Gi" \
+            --set logs.persistence.enabled="true" \
+            --set logs.persistence.size="10Gi" \
             --set dags.gitSync.enabled="true" \
             --set dags.gitSync.repo="https://github.com/nycmeshnet/nycmesh-airflow.git" \
             --set dags.gitSync.branch="james/init" \

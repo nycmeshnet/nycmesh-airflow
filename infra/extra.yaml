@@ -1,7 +1,7 @@
 config:
-  secrets.backend:
-    - airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-  secrets.backend_kwargs: >-
-    {"connections_prefix" : "Airflow/connections", "variables_prefix" : "Airflow/variables", 
-    "variables_lookup_pattern" : "", "connections_lookup_pattern" : "",
-    "config_prefix" : "Airflow/config", "config_lookup_pattern" : " "}    
+  secrets:
+    backend: airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
+    backend_kwargs: >-
+      {"connections_prefix" : "Airflow/connections", "variables_prefix" : "Airflow/variables", 
+      "variables_lookup_pattern" : "", "connections_lookup_pattern" : "",
+      "config_prefix" : "Airflow/config", "config_lookup_pattern" : " "}    

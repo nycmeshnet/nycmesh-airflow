@@ -53,6 +53,12 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 full_chain_path,
                 "--key-path",
                 priv_key_path,
+                "--config-dir",
+                "/tmp/certbot_config",
+                "--work-dir",
+                "/tmp/certbot_work",
+                "--logs-dir",
+                "/tmp/certbot_logs",
             ], check=True)
             
             print(completed.stdout)

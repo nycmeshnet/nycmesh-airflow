@@ -90,9 +90,9 @@ def omni_cert_dag():
         
         in_scope_nn = ["592"]
 
-        DNS_SERVER = Variable.get("tsigdns")
-        TSIG_KEY_NAME = Variable.get("tsigkeyname")
-        TSIG_KEY = Variable.get("tsigkey")
+        DNS_SERVER = Variable.get("Airflow/tsigdns")
+        TSIG_KEY_NAME = Variable.get("Airflow/tsigkeyname")
+        TSIG_KEY = Variable.get("Airflow/tsigkey")
         
         for nn in in_scope_nn:
             print(f"Getting cert for {nn}")
@@ -100,7 +100,7 @@ def omni_cert_dag():
             priv_key_path = f"/privkey{nn}.pem"
             fqdn = f"{nn}.nn.mesh.nycmesh.net"
             generate_certbot_tsig_cert(fqdn, DNS_SERVER, TSIG_KEY_NAME, TSIG_KEY, cert_path, priv_key_path)
-            deploy_to_omni(fqdn, Variable.get("omni"), cert_path, priv_key_path)
+            deploy_to_omni(fqdn, Variable.get("Airflow/omni"), cert_path, priv_key_path)
             print("Finished")
     
     omni_nn_cert_task()

@@ -90,8 +90,8 @@ def omni_cert_dag():
         
         in_scope_nn = ["592"]
 
-        DNS_SERVER = Variable.get("Airflow/tsigdns")
-        TSIG_KEY_NAME = Variable.get("Airflow/tsigkeyname")
+        DNS_SERVER = "199.170.132.47"
+        TSIG_KEY_NAME = "nn.mesh.nycmesh.net"
         TSIG_KEY = Variable.get("Airflow/tsigkey")
         
         for nn in in_scope_nn:

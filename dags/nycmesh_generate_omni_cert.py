@@ -5,7 +5,7 @@ from airflow.sdk import dag, task
 
 
 def generate_certbot_tsig_cert(fqdn_string, dns_server, tsig_key_name, tsig_key, full_chain_path, priv_key_path):
-    tsig_ini_file_path = "/tsig.ini"
+    tsig_ini_file_path = "/tmp/tsig.ini"
     with open(tsig_ini_file_path, "w") as fd:
         fd.write(f"""# Target DNS server
 dns_rfc2136_server = {dns_server}

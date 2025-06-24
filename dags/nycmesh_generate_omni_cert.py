@@ -108,8 +108,8 @@ dns_rfc2136_algorithm = HMAC-SHA512
         
         for nn in in_scope_nn:
             print(f"Getting cert for {nn}")
-            cert_path = f"/fullchain{nn}.pem"
-            priv_key_path = f"/privkey{nn}.pem"
+            cert_path = f"/tmp/fullchain{nn}.pem"
+            priv_key_path = f"/tmp/privkey{nn}.pem"
             fqdn = f"{nn}.nn.mesh.nycmesh.net"
             generate_certbot_tsig_cert(fqdn, DNS_SERVER, TSIG_KEY_NAME, TSIG_KEY, cert_path, priv_key_path)
             deploy_to_omni(fqdn, Variable.get("Airflow_omni"), cert_path, priv_key_path)

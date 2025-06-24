@@ -1,4 +1,5 @@
 import datetime
+import sys
 
 from airflow.sdk import dag, task
 
@@ -78,6 +79,9 @@ def omni_cert_dag():
         task_id="certbot_omni_nn_certv1"
     )
     def omni_nn_cert_task():
+        import subprocess
+        subprocess.check_call(f"{sys.executable} -m pip install certbot paramiko==3.5.0 scp==0.15.0", check=True)
+        
         # Imports inside of the virtual environment
         from paramiko import SSHClient, AutoAddPolicy
         from scp import SCPClient

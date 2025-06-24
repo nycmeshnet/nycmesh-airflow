@@ -73,3 +73,4 @@ jobs:
             --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
             --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}" \
             -f infra/extra.yaml
+          kubectl rollout restart -n airflow

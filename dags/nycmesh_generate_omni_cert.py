@@ -82,7 +82,7 @@ def omni_cert_dag():
 
         import subprocess
         from pathlib import Path
-        from airflow.sdk import Variable
+        from airflow.models import Variable
         
         tmp = subprocess.run("printenv", check=True)
         print(tmp.stdout)

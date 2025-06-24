@@ -103,7 +103,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
         in_scope_nn = ["592"]
 
         DNS_SERVER = "199.170.132.47"
-        TSIG_KEY_NAME = "nn.mesh.nycmesh.net."
+        TSIG_KEY_NAME = "nn.mesh.nycmesh.net"
         TSIG_KEY = Variable.get("Airflow_tsigkey")
         
         for nn in in_scope_nn:

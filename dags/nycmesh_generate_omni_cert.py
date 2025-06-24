@@ -75,12 +75,12 @@ args = {
 def omni_cert_dag():
     # @task.virtualenv(
     @task(
-        #task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.0", "scp==0.15.0"], system_site_packages=True
+        #task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.1", "scp==0.15.0"], system_site_packages=True
         task_id="certbot_omni_nn_certv1"
     )
     def omni_nn_cert_task():
         import subprocess
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "certbot", "paramiko==3.5.0", "scp==0.15.0"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "certbot", "paramiko==3.5.1", "scp==0.15.0"])
         
         # Imports inside of the virtual environment
         from paramiko import SSHClient, AutoAddPolicy

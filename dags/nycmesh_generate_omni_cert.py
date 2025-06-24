@@ -69,7 +69,6 @@ args = {
 @dag(
     dag_id="omni_nn_certv1",
     default_args=args,
-    schedule_interval=None,
     tags=["james", "nn", "tsig", "cert", "device"]
 )
 def omni_cert_dag():

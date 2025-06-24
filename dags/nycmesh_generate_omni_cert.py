@@ -72,8 +72,10 @@ args = {
     tags=["james", "nn", "tsig", "cert", "device"]
 )
 def omni_cert_dag():
-    @task.virtualenv(
-        task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.0", "scp==0.15.0"], system_site_packages=True
+    # @task.virtualenv(
+    @task(
+        #task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.0", "scp==0.15.0"], system_site_packages=True
+        task_id="certbot_omni_nn_certv1"
     )
     def omni_nn_cert_task():
         # Imports inside of the virtual environment

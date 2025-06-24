@@ -55,6 +55,12 @@ jobs:
             --set dags.gitSync.repo="https://github.com/nycmeshnet/nycmesh-airflow.git" \
             --set dags.gitSync.branch="james/init" \
             --set dags.gitSync.subPath="dags" \
+            --set apiServer.service.type="NodePort" \
+            --set apiServer.service.ports[0].port="8080" \
+            --set apiServer.service.ports[0].targetPort="8080" \
+            --set apiServer.service.ports[0].nodePort="30002" \
+            --set apiServer.service.ports[0].protocol="TCP" \
+            --set apiServer.service.ports[0].name="http" \
             --set apiServer.defaultUser.enabled="true" \
             --set apiServer.defaultUser.email="jameso+airflowapi@nycmesh.net" \
             --set apiServer.defaultUser.username="admin" \

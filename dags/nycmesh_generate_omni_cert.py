@@ -80,7 +80,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 print(stderr.read())
 
         import subprocess
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "certbot", "paramiko==3.5.1", "scp==0.15.0", "cryptography==42.0.8"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "certbot", "certbot-dns-rfc2136", "paramiko==3.5.1", "scp==0.15.0", "cryptography==42.0.8"])
         
         # Imports inside of the virtual environment
         from paramiko import SSHClient, AutoAddPolicy

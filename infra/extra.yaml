@@ -5,3 +5,7 @@ config:
       {"connections_prefix":"Airflow/connections", "variables_prefix":"Airflow/variables", 
       "variables_lookup_pattern":"", "connections_lookup_pattern":"",
       "config_prefix":"Airflow/config","config_lookup_pattern":"", "region_name":"us-east-1"}    
+
+extraEnv: |
+  - name: AIRFLOW__LOGGING__LOGGING_LEVEL
+    value: DEBUG

@@ -80,7 +80,7 @@ def omni_cert_dag():
     )
     def omni_nn_cert_task():
         import subprocess
-        subprocess.check_call(f"{sys.executable} -m pip install certbot paramiko==3.5.0 scp==0.15.0")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "certbot", "paramiko==3.5.0", "scp==0.15.0"])
         
         # Imports inside of the virtual environment
         from paramiko import SSHClient, AutoAddPolicy

@@ -73,5 +73,7 @@ jobs:
             --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
             --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}" \
             -f infra/extra.yaml
-          kubectl --kubeconfig ./config rollout restart -n airflow deploy
-          kubectl --kubeconfig ./config rollout restart -n airflow statefulset
+
+          # Rolling restart
+          kubectl --kubeconfig ./config --server https://${{ secrets.SSH_TARGET_IP }}:6443 -n airflow rollout restart deploy
+          kubectl --kubeconfig ./config --server https://${{ secrets.SSH_TARGET_IP }}:6443 -n airflow rollout restart statefulset

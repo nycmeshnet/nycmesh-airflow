@@ -1,6 +1,7 @@
-from airflow.models import DAG
-from airflow.decorators import task
-from airflow.utils.dates import days_ago
+import datetime
+
+from airflow.sdk import dag, task
+
 
 def generate_certbot_tsig_cert(fqdn_string, dns_server, tsig_key_name, tsig_key, full_chain_path, priv_key_path):
     tsig_ini_file_path = "/tsig.ini"
@@ -62,15 +63,16 @@ def deploy_to_omni(ip, password, cert_path, priv_key_path):
 
 args = {
     'owner': 'Airflow',
-    'start_date': days_ago(2),
+    'start_date': datetime.datetime(2021, 1, 1),
 }
 
-with DAG(
+@dag(
     dag_id="omni_nn_certv1",
     default_args=args,
     schedule_interval=None,
     tags=["james", "nn", "tsig", "cert", "device"]
-) as dag:
+)
+def omni_cert_dag():
     @task.virtualenv(
         task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.0", "scp==0.15.0"], system_site_packages=True
     )
@@ -81,7 +83,7 @@ with DAG(
 
         import subprocess
         from pathlib import Path
-        from airflow.models import Variable
+        from airflow.sdk import Variable
         
         tmp = subprocess.run("printenv", check=True)
         print(tmp.stdout)
@@ -103,3 +105,5 @@ with DAG(
             print("Finished")
     
     omni_nn_cert_task()
+
+omni_cert_dag()

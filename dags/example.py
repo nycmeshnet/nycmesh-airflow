@@ -3,16 +3,15 @@ from __future__ import print_function
 import time
 from builtins import range
 from pprint import pprint
+import datetime
 
-from airflow.utils.dates import days_ago
-
-from airflow.models import DAG
-from airflow.operators.python_operator import PythonOperator
-from airflow.operators.bash_operator import BashOperator
+from airflow.sdk import DAG
+from airflow.providers.standard.operators.python import PythonOperator
+from airflow.providers.standard.operators.bash import BashOperator
 
 args = {
     'owner': 'Airflow',
-    'start_date': days_ago(2),
+    'start_date': datetime.datetime(2021, 1, 1),
 }
 
 dag = DAG(

@@ -1,5 +1,6 @@
 import datetime
 import sys
+import os
 
 from airflow.sdk import dag, task
 
@@ -35,6 +36,7 @@ dns_rfc2136_secret = {tsig_key}
 # TSIG key algorithm
 dns_rfc2136_algorithm = HMAC-SHA512
 """)
+            os.chmod(tsig_ini_file_path, 0o600)
             
             # Get the cert from Let's Encrypt
             completed = subprocess.run([

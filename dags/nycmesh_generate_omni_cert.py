@@ -61,6 +61,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 "/tmp/certbot_work",
                 "--logs-dir",
                 "/tmp/certbot_logs",
+                "-v",
             ], check=True)
             
             print(completed.stdout)

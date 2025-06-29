@@ -75,8 +75,8 @@ jobs:
             --set webserver.startupProbe.failureThreshold="60" \
             --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
             --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}" \
-            --set images.airflow.repository="jamesomesh/airflow" \
-            --set images.airflow.digest="${{ inputs.image_digest }}" \
+            --set defaultAirflowRepository="jamesomesh/airflow" \
+            --set defaultAirflowDigest="${{ inputs.image_digest }}" \
             -f infra/extra.yaml
 
           # Rolling restart

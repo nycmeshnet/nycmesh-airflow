@@ -1,0 +1,5 @@
+certbot
+certbot-dns-rfc2136
+paramiko==3.5.1
+scp==0.15.0
+cryptography==42.0.8

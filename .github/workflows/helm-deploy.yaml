@@ -7,6 +7,9 @@ on:
       environment:
         required: true
         type: string
+      image_digest:
+        required: true
+        type: string
 
 jobs:
   helm_deploy:
@@ -72,6 +75,8 @@ jobs:
             --set webserver.startupProbe.failureThreshold="60" \
             --set webserverSecretKey="${{ secrets.AIRFLOW_SECRET_KEY }}" \
             --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}" \
+            --set images.airflow.repository="jamesomesh/airflow" \
+            --set images.airflow.digest="${{ inputs.image_digest }}" \
             -f infra/extra.yaml
 
           # Rolling restart

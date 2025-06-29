@@ -77,6 +77,7 @@ jobs:
             --set fernetKey="${{ secrets.AIRFLOW_FERNET_KEY }}" \
             --set defaultAirflowRepository="jamesomesh/airflow" \
             --set defaultAirflowDigest="${{ inputs.image_digest }}" \
+            --set images.pod_template.pullPolicy="Always" \
             -f infra/extra.yaml
 
           # Rolling restart

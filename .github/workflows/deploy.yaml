@@ -35,7 +35,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: jamesomesh/airflow:latest
+          tags: jamesomesh/airflow:3.0.2
 
   deploy_to_dev3:
     name: Deploy to dev 3

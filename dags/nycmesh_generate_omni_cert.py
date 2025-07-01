@@ -50,6 +50,7 @@ def omni_cert_dag():
             "544",
             "365",
             "666",
+            "240",
         ]
         return [x for x in in_scope_nn if get_expiry_date(x)]
 

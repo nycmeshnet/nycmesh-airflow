@@ -18,7 +18,10 @@ args = {
 def omni_cert_dag():
     @task
     def get_devices():
-        in_scope_nn = ["592"]
+        in_scope_nn = [
+            "592",
+            "544",
+        ]
         return in_scope_nn
 
     @task(

@@ -15,17 +15,13 @@ args = {
     tags=["james", "nn", "tsig", "cert", "device"]
 )
 def omni_cert_dag():
-    # @task.virtualenv(
     @task(
-        #task_id="certbot_omni_nn_certv1", requirements=["certbot", "paramiko==3.5.1", "scp==0.15.0"], system_site_packages=True
         task_id="certbot_omni_nn_certv1"
     )
     def omni_nn_cert_task():
 
         def generate_certbot_tsig_cert(fqdn_string, dns_server, tsig_key_name, tsig_key):
             tsig_ini_file_path = "/tmp/tsig.ini"
-            # full_chain_path = f"/tmp/fullchain{nn}.pem"
-            # priv_key_path = f"/tmp/privkey{nn}.pem"
             with open(tsig_ini_file_path, "w") as fd:
                 fd.write(f"""# Target DNS server
 dns_rfc2136_server = {dns_server}
@@ -54,10 +50,6 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 "jameso@nycmesh.net",
                 "-d",
                 fqdn_string,
-                # "--fullchain-path",
-                # full_chain_path,
-                # "--key-path",
-                # priv_key_path,
                 "--config-dir",
                 config_dir,
                 "--work-dir",
@@ -91,9 +83,6 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 print(stdout.read())
                 print(stderr.read())
 
-        import subprocess
-        #subprocess.check_call([sys.executable, "-m", "pip", "install", "certbot", "certbot-dns-rfc2136", "paramiko==3.5.1", "scp==0.15.0", "cryptography==42.0.8"])
-        
         # Imports inside of the virtual environment
         from paramiko import SSHClient, AutoAddPolicy
         from scp import SCPClient
@@ -101,10 +90,6 @@ dns_rfc2136_algorithm = HMAC-SHA512
         import subprocess
         from pathlib import Path
         from airflow.models import Variable
-        
-        tmp = subprocess.run("printenv", check=True)
-        print(tmp.stdout)
-        print(tmp.stderr)
         
         in_scope_nn = ["592"]
 

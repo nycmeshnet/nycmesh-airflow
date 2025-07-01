@@ -36,7 +36,7 @@ def omni_cert_dag():
                         pem_data = ssl.DER_cert_to_PEM_cert(data)
                         cert_data = x509.load_pem_x509_certificate(str.encode(pem_data))
                         print(f"Expiry date of {fqdn}:", cert_data.not_valid_after)
-                        return (cert_data.not_valid_after - datetime.now()) > timedelta(days=15)
+                        return (cert_data.not_valid_after - datetime.now()) < timedelta(days=15)
             except:
                 try:
                     res = requests.get(f"http://{fqdn}", timeout=TIMEOUT)

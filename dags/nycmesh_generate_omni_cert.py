@@ -18,11 +18,40 @@ args = {
 def omni_cert_dag():
     @task
     def get_devices():
+        from cryptography import x509
+        import socket
+        import ssl
+        from datetime import datetime, timedelta
+        import requests
+        
+        def get_expiry_date(hostname):
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+            
+            try:
+                with socket.create_connection((hostname, 443)) as sock:
+                    with context.wrap_socket(sock, server_hostname=hostname) as ssock:
+                        data = ssock.getpeercert(True)
+                        pem_data = ssl.DER_cert_to_PEM_cert(data)
+                        cert_data = x509.load_pem_x509_certificate(str.encode(pem_data))
+                        print(f"Expiry date of {hostname}:", cert_data.not_valid_after)
+                        return cert_data.not_valid_after - datetime.now() > timedelta(days=15)
+            except:
+                try:
+                    res = requests.get(f"http://{hostname}")
+                    res.raise_for_status()
+                    return True
+                except:
+                    return False
+            
         in_scope_nn = [
             "592",
             "544",
+            "365",
+            "666",
         ]
-        return in_scope_nn
+        return [x for x in in_scope_nn if get_expiry_date(x)]
 
     @task(
         task_id="certbot_omni_nn_certv1"

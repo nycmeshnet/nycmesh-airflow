@@ -57,7 +57,7 @@ def omni_cert_dag():
     @task(
         task_id="certbot_omni_nn_certv1"
     )
-    def omni_nn_cert_task(nn):
+    def omni_nn_cert_task(nns):
 
         def generate_certbot_tsig_cert(fqdn_string, dns_server, tsig_key_name, tsig_key):
             tsig_ini_file_path = "/tmp/tsig.ini"
@@ -101,7 +101,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
             print(completed.stdout)
             print(completed.stderr)
             
-            Path(tsig_ini_file_path).unlink()
+            # Path(tsig_ini_file_path).unlink()
 
             return f"{config_dir}/live/{fqdn_string}/fullchain.pem", f"{config_dir}/live/{fqdn_string}/privkey.pem"
 
@@ -134,13 +134,14 @@ dns_rfc2136_algorithm = HMAC-SHA512
         TSIG_KEY_NAME = "nn.mesh.nycmesh.net"
         TSIG_KEY = Variable.get("Airflow_tsigkey")
 
-        print(f"Getting cert for {nn}")
-        fqdn = f"{nn}.nn.mesh.nycmesh.net"
-        fullchain_path, privkey_path = generate_certbot_tsig_cert(fqdn, DNS_SERVER, TSIG_KEY_NAME, TSIG_KEY)
-        deploy_to_omni(fqdn, Variable.get("Airflow_omni"), fullchain_path, privkey_path)
+        for nn in nns:
+            print(f"Getting cert for {nn}")
+            fqdn = f"{nn}.nn.mesh.nycmesh.net"
+            fullchain_path, privkey_path = generate_certbot_tsig_cert(fqdn, DNS_SERVER, TSIG_KEY_NAME, TSIG_KEY)
+            deploy_to_omni(fqdn, Variable.get("Airflow_omni"), fullchain_path, privkey_path)
         print("Finished")
     
     nns = get_devices()
-    omni_nn_cert_task.expand(nn=nns)
+    omni_nn_cert_task(nns=nns)
 
 omni_cert_dag()

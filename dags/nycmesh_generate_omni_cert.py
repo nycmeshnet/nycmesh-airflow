@@ -106,7 +106,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
             except Exception as e:
                 with open("/tmp/certbot_logs/letsencrypt.log","r") as fd:
                     print("debug log:")
-                    print(fd.read)
+                    print(fd.read())
                 raise e
             
             # Path(tsig_ini_file_path).unlink()

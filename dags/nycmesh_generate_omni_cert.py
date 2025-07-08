@@ -107,6 +107,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 with open("/tmp/certbot_logs/letsencrypt.log","r") as fd:
                     print("debug log:")
                     print(fd.read)
+                raise e
             
             # Path(tsig_ini_file_path).unlink()
 

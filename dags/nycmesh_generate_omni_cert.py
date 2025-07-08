@@ -129,6 +129,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
         from scp import SCPClient
 
         import subprocess
+        import time
         from pathlib import Path
         from airflow.models import Variable
 
@@ -141,6 +142,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
             fqdn = f"{nn}.nn.mesh.nycmesh.net"
             fullchain_path, privkey_path = generate_certbot_tsig_cert(fqdn, DNS_SERVER, TSIG_KEY_NAME, TSIG_KEY)
             deploy_to_omni(fqdn, Variable.get("Airflow_omni"), fullchain_path, privkey_path)
+            time.sleep(30)
         print("Finished")
     
     nns = get_devices()

@@ -123,9 +123,17 @@ dns_rfc2136_algorithm = HMAC-SHA512
                     scp.put(priv_key_path, "privkey.pem")
 
                 stdin, stdout, stderr = ssh.exec_command(
-                    "/certificate/import file-name=fullchain.pem name=LEfullchain trusted=no;"
-                    "/certificate/import file-name=privkey.pem name=LEprivkey trusted=no;"
-                    "/ip/service set www-ssl certificate=LEfullchain disabled=no tls-version=only-1.2 address=10.0.0.0/8,199.167.59.0/24,199.170.132.0/24"
+                    """:global eval do={ :local t [:parse $1]; $t; };"""
+                    """:global eval6or7 do={if ($rosver = "6") do={$eval $1} else={$eval $2}};"""
+                    """eval6or7 """
+                        """ "/certificate import file-name=fullchain.pem name=LEfullchain passphrase=\"\"" """
+                        """ "/certificate/import file-name=fullchain.pem name=LEfullchain trusted=no"; """
+                    """eval6or7 """
+                        """ "/certificate import file-name=privkey.pem name=LEprivkey passphrase=\"\"" """
+                        """ "/certificate/import file-name=privkey.pem name=LEprivkey trusted=no"; """
+                    """eval6or7 """
+                        """ "/ip service set www-ssl certificate=LEfullchain disabled=no tls-version=only-1.2 address=10.0.0.0/8,199.167.59.0/24,199.170.132.0/24" """
+                        """ "/ip/service set www-ssl certificate=LEfullchain disabled=no tls-version=only-1.2 address=10.0.0.0/8,199.167.59.0/24,199.170.132.0/24"; """
                 )
                 print(stdout.read())
                 print(stderr.read())

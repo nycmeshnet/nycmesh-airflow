@@ -84,7 +84,7 @@ dns_rfc2136_algorithm = HMAC-SHA512
                 "--dns-rfc2136-credentials",
                 tsig_ini_file_path,
                 "--dns-rfc2136-propagation-seconds",
-                "120",
+                "310",
                 "--non-interactive",
                 "--agree-tos",
                 "-m",

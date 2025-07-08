@@ -77,31 +77,36 @@ dns_rfc2136_algorithm = HMAC-SHA512
             
             config_dir = "/tmp/certbot_config"
             # Get the cert from Let's Encrypt
-            completed = subprocess.run([
-                "certbot",
-                "certonly",
-                "--dns-rfc2136",
-                "--dns-rfc2136-credentials",
-                tsig_ini_file_path,
-                "--dns-rfc2136-propagation-seconds",
-                "310",
-                "--non-interactive",
-                "--agree-tos",
-                "-m",
-                "jameso@nycmesh.net",
-                "-d",
-                fqdn_string,
-                "--config-dir",
-                config_dir,
-                "--work-dir",
-                "/tmp/certbot_work",
-                "--logs-dir",
-                "/tmp/certbot_logs",
-                "-v",
-            ], check=True)
-            
-            print(completed.stdout)
-            print(completed.stderr)
+            try:
+                completed = subprocess.run([
+                    "certbot",
+                    "certonly",
+                    "--dns-rfc2136",
+                    "--dns-rfc2136-credentials",
+                    tsig_ini_file_path,
+                    "--dns-rfc2136-propagation-seconds",
+                    "310",
+                    "--non-interactive",
+                    "--agree-tos",
+                    "-m",
+                    "jameso@nycmesh.net",
+                    "-d",
+                    fqdn_string,
+                    "--config-dir",
+                    config_dir,
+                    "--work-dir",
+                    "/tmp/certbot_work",
+                    "--logs-dir",
+                    "/tmp/certbot_logs",
+                    "-v",
+                ], check=True)
+                
+                print(completed.stdout)
+                print(completed.stderr)
+            except Exception as e:
+                with open("/tmp/certbot_logs/letsencrypt.log","r") as fd:
+                    print("debug log:")
+                    print(fd.read)
             
             # Path(tsig_ini_file_path).unlink()
 
